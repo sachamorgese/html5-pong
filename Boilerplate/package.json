@@ -1,0 +1,16 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "description": "Boilerplate to use for the games I'm going to make",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babelify": "^8.0.0",
+    "budo": "^11.3.2"
+  },
+  "scripts": {
+    "start": "budo src/main.js:build.js --live -- -t [ babelify --presets [ env ] ]"
+  }
+}
