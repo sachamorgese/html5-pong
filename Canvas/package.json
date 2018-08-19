@@ -12,5 +12,9 @@
   },
   "scripts": {
     "start": "budo src/main.js:build.js --live -- -t [ babelify --presets [ env ] ]"
-  }
+  },
+  "prettier": {
+  "singleQuote": true,
+  "trailingComma": "all"
+}
 }
