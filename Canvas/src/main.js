@@ -93,46 +93,80 @@ const { width: w, height: h } = canvas;
 // ctx.globalAlpha = 0.3; // 0 invisible 1 solid
 
 // Draw logo
-ctx.globalCompositeOperation;
-const centerW = w / 2;
-const centerH = h / 2;
-ctx.font = 'bold 70pt Courier New';
-ctx.textAlign = 'center';
-ctx.fillStyle = 'white';
-ctx.fillText('Racist', centerW, centerH - 35);
-ctx.fillText('Raptor', centerW, centerH + 35);
+// ctx.globalCompositeOperation;
+// const centerW = w / 2;
+// const centerH = h / 2;
+// ctx.font = 'bold 70pt Courier New';
+// ctx.textAlign = 'center';
+// ctx.fillStyle = 'white';
+// ctx.fillText('Racist', centerW, centerH - 35);
+// ctx.fillText('Raptor', centerW, centerH + 35);
+//
+// ctx.globalCompositeOperation = 'source-atop';
+//
+// for (let i = 0; i < 25; i++) {
+//   ctx.fillStyle = `hsl(${i * (250 / 25)}, 90%, 55%)`;
+//   ctx.fillRect(centerW - 170, centerH - 95 + i * 5.35, 340, 20);
+// }
+//
+// ctx.fillStyle = '#999';
+// ctx.globalCompositeOperation = 'destination-over';
+// ctx.fillText('Racist', centerW + 3, centerH - 33);
+// ctx.fillText('Raptor', centerW + 3, centerH + 37);
+//
+// ctx.font = '30pt Courier New';
+// ctx.globalCompositeOperation = 'source-over';
+//
+// 'games'.split('').forEach((ch, i) => {
+//   ctx.fillText(ch, i * 37 + centerW - 80, centerH + 85);
+// });
+//
+// ctx.globalCompositeOperation = 'destination-over';
+// let x, y, radius;
+//
+// for (let i = 0; i < 550; i++) {
+//   x = Math.random() * w;
+//   y = Math.random() * h;
+//   radius = Math.random() * 3;
+//
+//   ctx.beginPath();
+//   ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+//   ctx.fill();
+// }
+// ctx.fillStyle = 'black';
+// ctx.fillRect(0, 0, w, h);
+// ctx.fillStyle = '#555';
 
-ctx.globalCompositeOperation = 'source-atop';
 
-for (let i = 0; i < 25; i++) {
-  ctx.fillStyle = `hsl(${i * (250 / 25)}, 90%, 55%)`;
-  ctx.fillRect(centerW - 170, centerH - 95 + i * 5.35, 340, 20);
+// Looping SetInterval
+// ctx.font = '70pt Courier New';
+// ctx.strokeStyle = '#999';
+// const start = Date.now();
+// const timer = setInterval(() => {
+//   // Clear the screen
+//   ctx.fillRect(0, 0, w, h);
+//   // Write the time
+//   ctx.strokeText(Date.now() - start, 20, 80);
+//
+//   if (Math.random() < 0.01) {
+//     ctx.strokeText("Game Over!", 160, 180);
+//     clearInterval(timer);
+//   }
+// }, 1000 / 60);
+
+
+// Looping SetTimeout
+ctx.font = '40pt Courier New';
+ctx.strokeStyle = '#999';
+const start = Date.now();
+function loopy () {
+  ctx.fillRect(0, 0, w, h);
+  ctx.strokeText(Date.now() - start, 20, 80);
+  if (Math.random() < 0.01) {
+    ctx.strokeText("Game Over!", 160, 180);
+  } else {
+// Loop
+    setTimeout(loopy, 1000 / 60);
+  }
 }
-
-ctx.fillStyle = '#999';
-ctx.globalCompositeOperation = 'destination-over';
-ctx.fillText('Racist', centerW + 3, centerH - 33);
-ctx.fillText('Raptor', centerW + 3, centerH + 37);
-
-ctx.font = '30pt Courier New';
-ctx.globalCompositeOperation = 'source-over';
-
-'games'.split('').forEach((ch, i) => {
-  ctx.fillText(ch, i * 37 + centerW - 80, centerH + 85);
-});
-
-ctx.globalCompositeOperation = 'destination-over';
-let x, y, radius;
-
-for (let i = 0; i < 550; i++) {
-  x = Math.random() * w;
-  y = Math.random() * h;
-  radius = Math.random() * 3;
-
-  ctx.beginPath();
-  ctx.arc(x, y, radius, 0, Math.PI * 2, false);
-  ctx.fill();
-}
-ctx.fillStyle = 'black';
-ctx.fillRect(0, 0, w, h);
-ctx.fillStyle = '#555';
+loopy(); // Start things running!
