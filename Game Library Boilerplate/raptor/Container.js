@@ -9,18 +9,22 @@ class Container {
     this.children.push(child);
     return child;
   }
-  
+
   remove(child) {
     this.children = this.children.filter(c => c !== child);
-    return child
+    return child;
   }
-  
-  update (dt, t) {
+
+  update(dt, t) {
     this.children.forEach(child => {
       if (child.update) {
-        child.update(dt, t)
+        child.update(dt, t);
       }
-    })
+    });
+  }
+
+  map(f) {
+    return this.children.map(f);
   }
 }
 

@@ -4,6 +4,10 @@ class Text {
     this.text = text;
     this.style = style;
   }
+  
+  updateText(text) {
+    this.text = text;
+  }
 }
 
 export default Text;
