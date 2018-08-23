@@ -1,5 +1,5 @@
-import Container from '../../Shooting Game/raptor/Container';
-import CanvasRenderer from '../../Shooting Game/raptor/renderer/CanvasRenderer';
+import Container from '../../Game Library Boilerplate/raptor/Container';
+import CanvasRenderer from '../../Game Library Boilerplate/raptor/renderer/CanvasRenderer';
 
 const STEP = 1 / 60;
 const MAX_FRAME = STEP * 5;

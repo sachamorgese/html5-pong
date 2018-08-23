@@ -26,8 +26,7 @@ class CanvasRenderer {
           if (fill) ctx.fillStyle = fill;
           if (align) ctx.textAlign = align;
           ctx.fillText(child.text, 0, 0);
-        }
-        else if (child.texture) {
+        } else if (child.texture) {
           ctx.drawImage(child.texture.img, x, y);
         }
         if (child.children) {
