@@ -19,9 +19,11 @@ class Game {
     let last = 0;
     const loopy = ms => {
       requestAnimationFrame(loopy);
+
       const t = ms / 1000; // Let's work in seconds
       dt = Math.min(t - last, MAX_FRAME);
       last = t;
+
       this.scene.update(dt, t);
       gameUpdate(dt, t);
       this.renderer.render(this.scene);

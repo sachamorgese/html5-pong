@@ -6,8 +6,9 @@ import CanvasRenderer from './renderer/CanvasRenderer';
 import Texture from './Texture';
 import Sprite from './Sprite';
 import Game from './Game';
+import math from '../utils/math';
 
-export {
+export default {
   KeyControls,
   MouseControls,
   Container,
@@ -16,4 +17,5 @@ export {
   Texture,
   Sprite,
   Game,
+  math,
 };
