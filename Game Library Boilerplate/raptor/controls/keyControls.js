@@ -27,6 +27,10 @@ class KeyControls {
     if (this.keys[down]) return 1;
     return 0;
   }
+
+  get enter() {
+    return this.keys[13]
+  }
 }
 
 export default KeyControls;

@@ -1,5 +1,5 @@
-import library from './';
-const { Container, CanvasRenderer } = library;
+import Container from './Container';
+import CanvasRenderer from './renderer/CanvasRenderer';
 
 const STEP = 1 / 60;
 const MAX_FRAME = STEP * 5;

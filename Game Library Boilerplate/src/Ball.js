@@ -8,21 +8,27 @@ export default class Ball {
     this.pos = { x, y };
     this.width = width;
     this.height = height;
-    
-    this.dy = math.rand(1, 3) === 2 ? -100 : 100;
-    this.dx = math.rand(-50, 51);
+    this.dy = 0;
+    this.dx = 0;
+  }
+
+  collides(paddle) {
+    return !((this.pos.x > paddle.pos.x + paddle.width) ||
+      (paddle.pos.x > this.pos.x + this.width)) &&
+      !((this.pos.y > paddle.pos.y + paddle.height) ||
+        (paddle.pos.y > this.pos.y + this.height))
   }
   
   reset() {
-    this.x = VIRTUAL_WIDTH / 2 - this.width / 2;
-    this.y = VIRTUAL_HEIGHT / 2 - this.height / 2;
-    this.dy = math.rand(1, 3) === 2 ? -100 : 100;
-    this.dx = math.rand(-50, 51);
+    this.pos.x = VIRTUAL_WIDTH / 2 - this.width / 2;
+    this.pos.y = VIRTUAL_HEIGHT / 2 - this.height / 2;
+    this.dy = 0;
+    this.dx = 0;
   }
   
   update(dt) {
-    this.x = this.x + this.dx * dt;
-    this.y = this.y + this.dy * dt;
+    this.pos.x = this.pos.x + this.dx * dt;
+    this.pos.y = this.pos.y + this.dy * dt;
   }
   
   render(ctx) {
