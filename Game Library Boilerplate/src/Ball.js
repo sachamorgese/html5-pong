@@ -1,4 +1,5 @@
 import config from './config';
+import state from './state';
 import math from '../utils/math';
 
 const { VIRTUAL_HEIGHT, VIRTUAL_WIDTH } = config;
@@ -27,6 +28,8 @@ export default class Ball {
   }
   
   update(dt) {
+    if (state.gameState !== 'play') return;
+    
     this.pos.x = this.pos.x + this.dx * dt;
     this.pos.y = this.pos.y + this.dy * dt;
   }

@@ -2,6 +2,7 @@ import raptor from '../raptor/';
 import config from './config';
 import Paddle from './Paddle';
 import Ball from './Ball';
+import state from './state';
 import math from '../utils/math';
 
 const { VIRTUAL_WIDTH, VIRTUAL_HEIGHT } = config;
@@ -20,45 +21,40 @@ scene.add(player1);
 scene.add(player2);
 scene.add(ball);
 
-let player1Score = 0;
-let player2Score = 0;
-let servingPlayer = 1;
-let winningPlayer = null;
-
-let gameState = 'start';
-
 game.run(dt => {
   if (controls.enter) {
-    if (gameState === 'start') {
-      gameState = 'serve';
-    } else if (gameState === 'serve') {
-      gameState = 'play';
-    } else if (gameState === 'done') {
-      gameState = 'serve';
+    if (state.gameState === 'play') {
+      return;
+    } else if (state.gameState === 'start') {
+      state.gameState = 'serve';
+    } else if (state.gameState === 'serve') {
+      state.gameState = 'play';
+    } else if (state.gameState === 'done') {
+      state.gameState = 'serve';
 
       ball.reset();
 
-      player1Score = 0;
-      player2Score = 0;
+      state.player1Score = 0;
+      state.player2Score = 0;
 
-      if (winningPlayer === 1) {
-        servingPlayer = 2;
+      if (state.winningPlayer === 1) {
+        state.servingPlayer = 2;
       } else {
-        servingPlayer = 1;
+        state.servingPlayer = 1;
       }
+      
+      state.winningPlayer = null;
     }
-    console.log(gameState);
   }
 
-  if (gameState === 'serve') {
+  if (state.gameState === 'serve') {
     ball.dy = math.rand(-50, 51);
-    if (servingPlayer === 1) {
+    if (state.servingPlayer === 1) {
       ball.dx = math.rand(140, 201);
     } else {
       ball.dx = -math.rand(140, 201);
     }
-    console.log(ball)
-  } else if (gameState === 'play') {
+  } else if (state.gameState === 'play') {
       if (ball.collides(player1)) {
         ball.dx = -ball.dx * 1.03;
         ball.pos.x = player1.pos.x + 5;
@@ -86,34 +82,34 @@ game.run(dt => {
         ball.dy = -ball.dy;
         // todo: Play sound (wall_hit)
 
-      } else if (ball.pos.y >= VIRTUAL_HEIGHT) {
+      } else if (ball.pos.y >= VIRTUAL_HEIGHT - ball.height) {
         ball.pos.y = VIRTUAL_HEIGHT -4;
         ball.dy = -ball.dy;
         // todo: Play sound (wall_hit)
       }
 
       if (ball.pos.x < 0) {
-        servingPlayer = 1;
-        player2Score += 1;
+        state.servingPlayer = 1;
+        state.player2Score += 1;
         // todo: Play sound (score)
 
-        if (player2Score === 10) {
-          winningPlayer = 2;
-          gameState = 'done';
+        if (state.player2Score === 10) {
+          state.winningPlayer = 2;
+          state.gameState = 'done';
         } else {
-          gameState = 'serve';
+          state.gameState = 'serve';
           ball.reset();
         }
       } else if (ball.pos.x > VIRTUAL_WIDTH) {
-        servingPlayer = 2;
-        player1Score += 1;
+        state.servingPlayer = 2;
+        state.player1Score += 1;
         // todo: Play sound (score)
-
-          if (player1Score === 10) {
-            winningPlayer = 1;
-            gameState = 'done';
+  
+        if (state.player1Score === 10) {
+            state.winningPlayer = 1;
+            state.gameState = 'done';
           } else {
-            gameState = 'serve';
+            state.gameState = 'serve';
             ball.reset();
           }
       }
