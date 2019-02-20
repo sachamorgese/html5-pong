@@ -21,13 +21,42 @@ scene.add(player1);
 scene.add(player2);
 scene.add(ball);
 
-game.run(dt => {
-  if (controls.enter) {
+const font = (fontSize) => `${fontSize} RetroFont`;
+
+const common = (fontSize) => ({
+  font: font(fontSize),
+  fill: '#fff',
+  align: 'center',
+});
+
+const smallFont = common(8);
+const largeFont = common(16);
+const scoreFont = common(32);
+
+const welcome = new Text('Welcome to Pong!', VIRTUAL_WIDTH / 2, 10, smallFont);
+const pressEnter = new Text('Press Enter to begin!', VIRTUAL_WIDTH / 2, 20, smallFont);
+const playerServe = (serve) => new Text(`Player ${serve}'s serve!`, VIRTUAL_WIDTH / 2, 10, smallFont );
+const player1Serve = playerServe(1);
+const player2Serve = playerServe(2);
+const toServe = new Text('Press Enter to serve!', VIRTUAL_WIDTH / 2, 20, smallFont);
+
+scene.add(welcome);
+scene.add(pressEnter);
+
+game.run((dt, t) => {
+  if (controls.enter && !state.holdingStart) {
+    state.holdingStart = true;
     if (state.gameState === 'play') {
       return;
     } else if (state.gameState === 'start') {
+      scene.remove(welcome);
+      scene.remove(pressEnter);
       state.gameState = 'serve';
+      scene.add(state.servingPlayer === 1 ? player1Serve : player2Serve);
+      scene.add(toServe);
     } else if (state.gameState === 'serve') {
+      scene.remove(state.servingPlayer === 1 ? player1Serve : player2Serve);
+      scene.remove(toServe);
       state.gameState = 'play';
     } else if (state.gameState === 'done') {
       state.gameState = 'serve';
@@ -45,6 +74,8 @@ game.run(dt => {
       
       state.winningPlayer = null;
     }
+  } else if (!controls.enter) {
+    state.holdingStart = false;
   }
 
   if (state.gameState === 'serve') {
@@ -60,19 +91,20 @@ game.run(dt => {
         ball.pos.x = player1.pos.x + 5;
 
         if (ball.dy < 0) {
-          ball.dy = math.rand(-150, -11);
+          ball.dy = -math.rand(10, 151);
         } else {
           ball.dy = math.rand(10, 151);
         }
+
         // todo: Play sound (paddle_hit)
       } else if (ball.collides(player2)) {
         ball.dx = -ball.dx * 1.03;
         ball.pos.x = player2.pos.x - 4;
 
-        if (ball.dy < 0) {
+        if (ball.dy > 0) {
           ball.dy = math.rand(10, 151);
         } else {
-          ball.dy = math.rand(-150, -11);
+          ball.dy = -math.rand(10, 151);
         }
         // todo: Play sound (paddle_hit)
       }

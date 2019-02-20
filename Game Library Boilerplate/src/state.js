@@ -4,4 +4,5 @@ export default {
   player2Score: 0,
   servingPlayer: 1,
   winningPlayer: null,
+  holdingStart: false,
 }
