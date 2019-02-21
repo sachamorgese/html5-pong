@@ -23,13 +23,20 @@ export default class Ball {
   reset() {
     this.pos.x = VIRTUAL_WIDTH / 2 - this.width / 2;
     this.pos.y = VIRTUAL_HEIGHT / 2 - this.height / 2;
-    this.dy = 0;
-    this.dx = 0;
+    this.setBall()
+  }
+  
+  setBall() {
+    this.dy = math.rand(-50, 51);
+    if (state.servingPlayer === 1) {
+      this.dx = math.rand(140, 201);
+    } else {
+      this.dx = -math.rand(140, 201);
+    }
   }
   
   update(dt) {
     if (state.gameState !== 'play') return;
-    
     this.pos.x = this.pos.x + this.dx * dt;
     this.pos.y = this.pos.y + this.dy * dt;
   }

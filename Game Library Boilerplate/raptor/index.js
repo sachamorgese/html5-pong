@@ -3,6 +3,7 @@ import Container from './Container';
 import Text from './Text';
 import CanvasRenderer from './renderer/CanvasRenderer';
 import Game from './Game';
+import Sound from './Sound';
 import math from '../utils/math';
 
 export default {
@@ -11,5 +12,6 @@ export default {
   Text,
   CanvasRenderer,
   Game,
+  Sound,
   math,
 };

@@ -5,8 +5,9 @@ class CanvasRenderer {
     this.h = canvas.height = h;
     this.view = canvas;
     this.ctx = canvas.getContext('2d');
+    this.ctx.imageSmoothingEnabled = true;
   }
-
+  
   render(container, clear = true) {
     const { ctx } = this;
     function renderRec(container) {
@@ -23,7 +24,7 @@ class CanvasRenderer {
         }
 
         // Draw the leaf node
-        if (child.text) {
+        if (child.text !== undefined) {
           const { font, fill, align } = child.style;
           if (font) ctx.font = font;
           if (fill) ctx.fillStyle = fill;
