@@ -37,7 +37,7 @@ const largeFont = common(16);
 const scoreFont = common(32);
 
 const welcome = new Text('Welcome to Pong!', VIRTUAL_WIDTH / 2, 20, smallFont);
-const pressEnter = new Text('Press Enter!', VIRTUAL_WIDTH / 2, 30, smallFont);
+const pressEnter = new Text('Press shift!', VIRTUAL_WIDTH / 2, 30, smallFont);
 const playerServe = (serve) => new Text(`Player ${serve}'s serve!`, VIRTUAL_WIDTH / 2, 20, smallFont );
 const player1Serve = playerServe(1);
 const player2Serve = playerServe(2);
@@ -54,7 +54,7 @@ scene.add(player1Score);
 scene.add(player2Score);
 
 game.run((dt, t) => {
-  if (controls.enter && !state.holdingStart) {
+  if (controls.shift && !state.holdingStart) {
     state.holdingStart = true;
     if (state.gameState === 'play') {
       return;
@@ -89,7 +89,7 @@ game.run((dt, t) => {
       
       state.winningPlayer = null;
     }
-  } else if (!controls.enter) {
+  } else if (!controls.shift) {
     state.holdingStart = false;
   }
 

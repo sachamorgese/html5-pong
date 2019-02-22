@@ -28,8 +28,8 @@ class KeyControls {
     return 0;
   }
 
-  get enter() {
-    return this.keys[13]
+  get shift() {
+    return this.keys[16]
   }
 }
 
