@@ -11,7 +11,8 @@
     "budo": "^11.3.2"
   },
   "scripts": {
-    "start": "budo src/main.js:build.js --live -- -t [ babelify --presets [ env ] ]"
+    "dev": "snowpack dev",
+    "build": "snowpack build"
   },
   "prettier": {
     "singleQuote": true,
